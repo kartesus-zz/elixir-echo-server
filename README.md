@@ -1,6 +1,7 @@
 # Echo server in Elixir
 
 ## Create the project
+
 ```
 mix new echo --bare  
 ```
@@ -45,8 +46,9 @@ defp recv(conn) do
 end
 ```
 
-## Running
+## Running on the console.
 To run this open a console and start the server.
+
 ```
 $ iex -S mix
 iex> Echo.Server.start(6000)
@@ -55,3 +57,25 @@ iex> Echo.Server.start(6000)
 The ```-S mix``` options will load your project into the current session.
 
 Connect using telnet or netcat and try it out.
+
+## Automating tasks
+Create a ```lib/tasks.ex``` file and a module called ```Mix.Tasks.Start```. The
+```run``` function will be called by mix when we invoke the task.
+
+```elixir
+def run(_) do
+  Echo.Server.start(6000)
+end
+```
+
+Compile your app and start the server
+
+```
+$ mix compile
+$ mix start
+```
+
+or 
+```
+$ mix do compile, start
+```
